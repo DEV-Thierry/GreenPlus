@@ -1,0 +1,310 @@
+﻿<UserControl x:Class="GreenPlusERP.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GreenPlusERP.Views"
+             xmlns:ViewModel="clr-namespace:GreenPlusERP.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             Style="{StaticResource Page_Style}">
+
+
+<Grid Margin="0,4,0,-4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--primeira seção-->
+        <Grid Height="90"
+          VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Saudações-->
+            <StackPanel>
+                <StackPanel.DataContext>
+                    <ViewModel:HomeViewModel/>
+                </StackPanel.DataContext>
+
+                <Border CornerRadius="10"
+                    Height="70"
+                    Margin="10">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#316b47" Offset="0"/>
+                            <GradientStop Color="#5fcf8a" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
+                                       FontSize="18"
+                                       FontFamily="Montserrat"
+                                       Margin="20,10,0,0"
+                                       Foreground="#E9E9E9"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Seja bem vindo(a) de volta"
+                               FontSize="14"
+                               FontFamily="Montserrat"
+                               Margin="20,10,0,0"
+                               Foreground="#E9E9E9"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+
+            <!--Notificações-->
+            <StackPanel Grid.Column="1">
+                <Border Background="#FFF"
+                    CornerRadius="10"
+                    Height="70"
+                    Margin="10,10,10,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Icon:PackIconMaterial Kind="Bell"
+                                           Width="40"
+                                           Height="40"
+                                           Foreground="#7d7d7d"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <!--fim da primeira seção-->
+
+
+        <!--Seção de relatórios-->
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="450"/>
+            </Grid.ColumnDefinitions>
+
+            <!--grafico pizza e quantidade de plantio e colheita-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--quantidade plantio e colheita-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Plantio-->
+                    <StackPanel>
+                        <Border CornerRadius="10"
+                            Height="70"
+                            VerticalAlignment="Center"
+                            Margin="10">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Offset="0"
+                                              Color="#F0A8A1"/>
+                                    <GradientStop Offset="1"
+                                              Color="#FDC8BE"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                    </StackPanel>
+
+                    <!--colheita-->
+                    <StackPanel Grid.Column="1">
+                        <Border Height="70"
+                            CornerRadius="10"
+                            Margin="10">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#FFCEAD"
+                                              Offset="0"/>
+                                    <GradientStop Color="#FFEAD5"
+                                              Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!--grafico pizza-->
+                <Grid Grid.Row="1">
+                    <Border Background="#E1E1E1"
+                        CornerRadius="10"
+                        Margin="10"/>
+                    <StackPanel>
+                        <TextBlock Text="Vendas por Categoria"
+                                   FontSize="18"
+                                   FontFamily="Montserrat"
+                                   Margin="20,20,0,0    "/>
+                    </StackPanel>
+
+                </Grid>
+
+            </Grid>
+
+            <!--Relatório de vendas-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--Gráfico total de vendas-->
+                <Grid Grid.Row="0"
+                  Margin="20,10">
+                    <Border Background="#E1E1E1"
+                        CornerRadius="10"/>
+                    <StackPanel>
+                        <TextBlock Text="Total de Vendas"
+                               FontSize="14"
+                               FontFamily="Montserrat"
+                               Margin="10,10,0,0"/>
+                    </StackPanel>
+                </Grid>
+
+
+                <!--seção de vendas-->
+                <Grid Grid.Row="1"
+                  Margin="20,10">
+                    <Border Background="#E1E1E1"
+                        CornerRadius="10"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Titulo de Vendas-->
+                        <StackPanel>
+                            <TextBlock Text="Vendas"
+                                   FontSize="14"
+                                   FontFamily="Montserrat"
+                                   Margin="10,10,0,0"/>
+                        </StackPanel>
+
+                        <!--Processamento-->
+                        <Border Grid.Row="1"
+                                Background="#FFF"
+                                CornerRadius="10"
+                                Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Em Processamento"
+                                               FontSize="10"
+                                               Foreground="DarkGray"
+                                               Margin="10,5,0,0"/>
+                                    
+                                    <!--aplicar logica para numero de venda em processamento-->
+                                </StackPanel>
+
+                                <Border Grid.Column="1"
+                                        CornerRadius="5"
+                                        Background="#E1E1E1"
+                                        Width="55"
+                                        Height="55">
+                                    <Icon:PackIconMaterial Kind="CartCheck"
+                                                           Height="35"
+                                                           Width="35"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!--Aprovado-->
+                        <Border Grid.Row="2"
+                                Background="#FFF"
+                                CornerRadius="10"
+                                Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Pagamento Aprovado"
+                                               FontSize="10"
+                                               Foreground="DarkGray"
+                                               Margin="10,5,0,0"/>
+
+                                    <!--aplicar logica para numero de venda com pagamento concluido-->
+                                </StackPanel>
+
+                                <Border Grid.Column="1"
+                                        CornerRadius="5"
+                                        Background="#E1E1E1"
+                                        Width="55"
+                                        Height="55">
+                                    <Icon:PackIconMaterial Kind="CashMultiple"
+                                                           Height="35"
+                                                           Width="35"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!--Entregue-->
+                        <Border Grid.Row="3"
+                                Background="#FFF"
+                                CornerRadius="10"
+                                Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Produto Entregue"
+                                               FontSize="10"
+                                               Foreground="DarkGray"
+                                               Margin="10,5,0,0"/>
+
+                                    <!--aplicar logica para numero de Produtos entregues no mes-->
+                                </StackPanel>
+
+                                <Border Grid.Column="1"
+                                        CornerRadius="5"
+                                        Background="#E1E1E1"
+                                        Width="55"
+                                        Height="55">
+                                    <Icon:PackIconFontAwesome Kind="TruckSolid"
+                                                           Height="35"
+                                                           Width="35"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>
