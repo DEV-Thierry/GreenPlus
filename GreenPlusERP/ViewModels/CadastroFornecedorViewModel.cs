@@ -24,6 +24,7 @@ namespace GreenPlusERP.ViewModels
 
         public ICommand CadastrarFornecedor {  get; set; }
         public ICommand ConsultarFornecedor {  get; set; }
+        public ICommand DeletarFornecedor{ get; set; }
 
         //construtor 
         public CadastroFornecedorViewModel()
@@ -33,6 +34,17 @@ namespace GreenPlusERP.ViewModels
 
             CadastrarFornecedor = new viewModelCommand(executeCadastro, canExecuteCadastro);
             ConsultarFornecedor = new viewModelCommand(executeConsulta, canExecuteConsulta);
+            DeletarFornecedor = new viewModelCommand(deletarFornecedor, canDeleteFornecedor);
+        }
+
+        private bool canDeleteFornecedor(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void deletarFornecedor(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private bool canExecuteConsulta(object obj)
@@ -50,8 +62,16 @@ namespace GreenPlusERP.ViewModels
 
         private void executeConsulta(object obj)
         {
-            string Cnpj = Regex.Replace(Fornecedor.cnpj, "[^0-9]+", "");
-            Fornecedor = fornecedorRepository.cnpjByApi(Cnpj);
+
+            if (fornecedorRepository.VerificaCNPJ(Fornecedor.cnpj))
+            {
+                Fornecedor = fornecedorRepository.GetByCnpj(Fornecedor.cnpj);
+            }
+            else
+            {
+                string Cnpj = Regex.Replace(Fornecedor.cnpj, "[^0-9]+", "");
+                Fornecedor = fornecedorRepository.cnpjByApi(Cnpj);
+            }
         }
 
         private bool canExecuteCadastro(object obj)

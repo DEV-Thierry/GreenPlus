@@ -68,7 +68,41 @@ namespace GreenPlusERP.Repositorios
 
         public FornecedorModel GetByCnpj(string cnpj)
         {
-            throw new NotImplementedException();
+            FornecedorModel Fornecedor = null;
+
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM [Fornecedor] where cnpj = @cnpj";
+                command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = Regex.Replace(cnpj, "[^0-9]+", "");
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        Fornecedor = new FornecedorModel()
+                        {
+                            cnpj = reader[1].ToString(),
+                            razaoSocial = reader[2].ToString(),
+                            situação = reader[3].ToString(),
+                            email = reader[4].ToString(),
+                            contato = reader[5].ToString(),
+                            nomeResponsável = reader[6].ToString(),
+                            logradouro = reader[7].ToString(),
+                            numero = reader[8].ToString(),
+                            bairro = reader[9].ToString(),
+                            complemneto = reader[10].ToString(),
+                            cep = reader[11].ToString(),
+                            uf = reader[12].ToString(),
+                            municipio = reader[13].ToString()
+                        };
+                    }
+                }
+            }
+
+            return Fornecedor;
         }
 
         public FornecedorModel GetByNome(string nome)
@@ -83,7 +117,28 @@ namespace GreenPlusERP.Repositorios
 
         public bool VerificaCNPJ(string cnpj)
         {
-            throw new NotImplementedException();
+            bool existe;
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM [Fornecedor] where cnpj = @cnpj";
+                command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = Regex.Replace(cnpj, "[^0-9]+", "");
+
+                using (var reader = command.ExecuteReader())
+                {
+                    if(reader.Read())
+                    {
+                        existe = true;
+                    }else
+                    {
+                        existe= false;
+                    }
+                }
+            }
+
+            return existe;
         }
     }
 }
