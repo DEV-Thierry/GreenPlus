@@ -14,6 +14,7 @@ namespace GreenPlusERP.Repositorios
         void Edit(FornecedorModel fornecedor);
         void Remove(string cnpj);
         FornecedorModel GetByCnpj(string cnpj);
+        FornecedorModel cnpjByApi(string cnpj);
         FornecedorModel GetByNome(string nome);
     }
 }

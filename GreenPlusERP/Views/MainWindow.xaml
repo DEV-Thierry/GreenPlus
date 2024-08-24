@@ -122,7 +122,7 @@
                                         <Button x:Name="cadastroFuncionario"
                                                 Command="{Binding CadastroFornecedorCommand}"
                                                 Style="{StaticResource BotaoDropdown}"
-                                                Margin="4,7,0,0">Funcionário</Button>
+                                                Margin="4,7,0,0">Fornecedor</Button>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>

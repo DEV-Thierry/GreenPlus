@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Xceed.Wpf.Toolkit;
+
 namespace GreenPlusERP.Views
 {
     /// <summary>
@@ -24,5 +26,7 @@ namespace GreenPlusERP.Views
         {
             InitializeComponent();
         }
+
+      
     }
 }

@@ -3,12 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpfToolkit="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              xmlns:local="clr-namespace:GreenPlusERP.Views"
+             xmlns:ViewModel="clr-namespace:GreenPlusERP.ViewModels"
              xmlns:CustomControl="clr-namespace:GreenPlusERP.CustomControl"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280"
              Style="{StaticResource Page_Style}">
+
+    <UserControl.DataContext>
+        <ViewModel:CadastroFornecedorViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
         <Border Background="#E9E9E9"
             CornerRadius="0,20,20,0"/>
@@ -62,9 +69,16 @@
                                            FontFamily="Montserrat"
                                            FontSize="14"
                                            Margin="20,20,0,0"/>
-                                <TextBox Margin="20,5,20,10"
-                                         
-                                         Style="{StaticResource TextBoxCadastro}"/>
+
+
+                                <wpfToolkit:MaskedTextBox Name="txtCnpj"
+                                                          Style="{StaticResource TextBoxCadastro}"
+                                                          Mask="00,000,000/0000-00"
+                                                          AutoSelectBehavior="OnFocus"
+                                                          Margin="20,5,20,10"
+                                                          Text="{Binding Fornecedor.cnpj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    
+                                </wpfToolkit:MaskedTextBox>
                             </StackPanel>
 
                             <StackPanel Grid.Column="1">
@@ -73,17 +87,17 @@
                                            FontSize="14"
                                            Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                         
+                                         Text="{Binding Fornecedor.razaoSocial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Situação"
+                                <TextBlock Text="{Binding Fornecedor.razaoSocial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            FontFamily="Montserrat"
                                            FontSize="14"
                                            Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                         
+                                         Text="{Binding Fornecedor.situação}"
                                          Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
                         </Grid>
@@ -103,7 +117,7 @@
                                        FontSize="14"
                                        Margin="20,10,0,0"/>
                                 <TextBox Margin="20,5,30,0"
-                                     
+                                     Text="{Binding Fornecedor.email}"
                                      Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -113,7 +127,7 @@
                                        FontSize="14"
                                        Margin="20,10,0,0"/>
                                 <TextBox Margin="20,5,30,0"
-                                     
+                                     Text="{Binding Fornecedor.contato}"
                                      Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -123,6 +137,7 @@
                                        FontSize="14"
                                        Margin="20,10,0,0"/>
                                 <TextBox Margin="20,5,30,0"
+                                         Text="{Binding Fornecedor.nomeResponsável}"
                                      Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
                         </Grid>
@@ -173,7 +188,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                            Text="{Binding Fornecedor.logradouro}"     
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -183,7 +198,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                                 Text="{Binding Fornecedor.numero}"
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -193,7 +208,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                                 Text="{Binding Fornecedor.bairro}"
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -216,7 +231,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                            Text="{Binding Fornecedor.complemneto}" 
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -226,7 +241,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                                 Text="{Binding Fornecedor.cep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 
@@ -236,7 +251,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                                 Text="{Binding Fornecedor.uf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
                             
@@ -246,9 +261,11 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                                 
+                                                 Text="{Binding Fornecedor.municipio, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
+                            
+                            
 
                         </Grid>
                     </StackPanel>
@@ -263,7 +280,7 @@
                     Margin="0,0,40,0">
                 <CustomControl:Btn Style="{StaticResource btnCad}"
                                Cursor="Hand"
-                               Command="{Binding ConsulteCommand}"
+                               Command="{Binding ConsultarFornecedor}"
                                Margin="10,0,10,0"
                                VerticalAlignment="Top">
                     <Border Background="#F8A348"
@@ -298,7 +315,7 @@
 
                 <CustomControl:Btn  Style="{StaticResource btnCad}"
                 Cursor="Hand"
-                Command="{Binding CadastrarUsuario}"
+                Command="{Binding CadastrarFornecedor}"
                 VerticalAlignment="Top"
                 Margin="0,0,0,0">
                     <Border Background="#3A7B50"
