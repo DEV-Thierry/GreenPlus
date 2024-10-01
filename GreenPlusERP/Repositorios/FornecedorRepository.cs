@@ -110,9 +110,27 @@ namespace GreenPlusERP.Repositorios
             throw new NotImplementedException();
         }
 
-        public void Remove(string cnpj)
+        public int GetCount(string cnpj)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            
+
+            return count;
+        }
+
+        public void Remove(string cnpj, string nome)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "DELETE FROM [Fornecedor] where cnpj=@cnpj AND nomeResponsavel = @nomeResponsavel ";
+                command.Parameters.Add("@cnpj", SqlDbType.VarChar).Value = Regex.Replace(cnpj, "[^0-9]+", "");
+                command.Parameters.Add("@nomeResponsavel", SqlDbType.VarChar).Value = nome;
+
+                command.ExecuteNonQuery();
+            }
         }
 
         public bool VerificaCNPJ(string cnpj)

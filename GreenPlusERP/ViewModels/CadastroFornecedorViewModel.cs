@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GreenPlusERP.ViewModels
@@ -39,7 +40,18 @@ namespace GreenPlusERP.ViewModels
 
         private bool canDeleteFornecedor(object obj)
         {
-            throw new NotImplementedException();
+            bool canDelete;
+
+            if(string.IsNullOrWhiteSpace(Fornecedor.cnpj) && 
+                string.IsNullOrWhiteSpace(Fornecedor.nomeResponsável))
+            {
+                canDelete = false;
+            }else
+            {
+                canDelete=true;
+            }
+
+            return canDelete;
         }
 
         private void deletarFornecedor(object obj)
@@ -69,6 +81,7 @@ namespace GreenPlusERP.ViewModels
             }
             else
             {
+                MessageBox.Show("CNPJ não registrado, informe o NOME DO RESPONSÁVEL para cadastra-lo");
                 string Cnpj = Regex.Replace(Fornecedor.cnpj, "[^0-9]+", "");
                 Fornecedor = fornecedorRepository.cnpjByApi(Cnpj);
             }
@@ -104,6 +117,7 @@ namespace GreenPlusERP.ViewModels
         private void executeCadastro(object obj)
         {
             fornecedorRepository.Add(Fornecedor);
+            MessageBox.Show("Fornecedor cadastrado");
             Fornecedor = new FornecedorModel();
         }
 

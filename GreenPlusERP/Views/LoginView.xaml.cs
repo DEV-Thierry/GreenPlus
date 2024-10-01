@@ -22,7 +22,7 @@ namespace GreenPlusERP.Views
     {
         public LoginView()
         {
-            InitializeComponent();
+                InitializeComponent();
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)

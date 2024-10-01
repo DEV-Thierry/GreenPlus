@@ -92,7 +92,7 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="{Binding Fornecedor.razaoSocial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBlock Text="Situação"
                                            FontFamily="Montserrat"
                                            FontSize="14"
                                            Margin="20,20,0,0"/>

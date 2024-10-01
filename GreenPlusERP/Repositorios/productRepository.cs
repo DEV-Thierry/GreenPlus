@@ -38,13 +38,13 @@ namespace GreenPlusERP.Repositorios
             {
                 connection.Open(); command.Connection = connection;
                 command.CommandText = "update [Produto] set NomePlanta = @nome, Classificacao = @classificacao, TempoEstimado = @tempo, Temperatura = @temp, Irrigacao = @irrigacao, ValorVenda = @valor where NomeCientifico = @nomeCien";
-                command.Parameters.Add("@nome", SqlDbType.VarChar).Value= productModel.nome;
-                command.Parameters.Add("@classificacao", SqlDbType.VarChar).Value= productModel.classificacao;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value= productModel.nome.Trim();
+                command.Parameters.Add("@classificacao", SqlDbType.VarChar).Value= productModel.classificacao.Trim();
                 command.Parameters.Add("@tempo", SqlDbType.Int).Value= int.Parse(productModel.tempoEstimado);
                 command.Parameters.Add("@temp", SqlDbType.Decimal).Value= decimal.Parse(productModel.temperatura);
                 command.Parameters.Add("@irrigacao", SqlDbType.Int).Value= int.Parse(productModel.irrigacao);
                 command.Parameters.Add("@valor", SqlDbType.Float).Value= productModel.valorVenda;
-                command.Parameters.Add("@nomeCien", SqlDbType.VarChar).Value= productModel.nomeCientifico;
+                command.Parameters.Add("@nomeCien", SqlDbType.VarChar).Value= productModel.nomeCientifico.Trim();
 
                 command.ExecuteNonQuery();
             }
@@ -59,7 +59,7 @@ namespace GreenPlusERP.Repositorios
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "Select * from [Produto] where NomeCientifico = @nomeCientifico";
-                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = productModel.nomeCientifico;
+                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = productModel.nomeCientifico.Trim();
 
                 existingData = command.ExecuteScalar() == null ? false : true;
             }
@@ -81,7 +81,7 @@ namespace GreenPlusERP.Repositorios
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "select * from Produto where NomePlanta = @nome";
-                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = product.nome;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = product.nome.Trim();
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -100,14 +100,24 @@ namespace GreenPlusERP.Repositorios
 
                     }
 
+
+
                     return product;
                 }
             }
         }
 
-            public void Remove(int id)
+            public void Remove(string nomeCientifico)
         {
-            throw new NotImplementedException();
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open(); command.Connection = connection;
+                command.CommandText = "delete from [Produto] where NomeCientifico = @nomeCientifico";
+                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = nomeCientifico;
+
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

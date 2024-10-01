@@ -41,8 +41,41 @@ namespace GreenPlusERP.ViewModels
             Product = new ProductModel();
             CadastroCommand = new viewModelCommand(ExecuteCadastro, CanExecuteCadastro);
             ConsultarCommand = new viewModelCommand(ExecuteConsulta, CanExecuteConsulta);
+            DeletarCommand = new viewModelCommand(ExecuteDelete, CanExecuteDelete);
             Product.valorVenda = 0;
             isDetalheVisible = true;
+        }
+
+        private bool CanExecuteDelete(object obj)
+        {
+            if(string.IsNullOrWhiteSpace(Product.nomeCientifico))
+            {
+                return false;             }
+            else
+            {
+                if(_repository.ExistingData(Product))
+                {
+                    return true;
+                }else
+                {
+                    return false;
+                }
+            }
+        }
+        
+
+        private void ExecuteDelete(object obj)
+        {
+            string confirma = "Tem certeza que deseja deletar o produto: \"" + Product.nome.ToString() + "\"";
+            string caption = "Deletando dados";
+            var result = MessageBox.Show(confirma, caption, MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _repository.Remove(Product.nomeCientifico);
+                MessageBox.Show($"prduto: {Product.nome} deletado com sucesso!");
+                Product = new ProductModel();
+            }
         }
 
         private bool CanExecuteConsulta(object obj)
@@ -60,7 +93,14 @@ namespace GreenPlusERP.ViewModels
 
         private void ExecuteConsulta(object obj)
         {
-           Product = _repository.GetByName(Product);
+            try
+            {
+                
+                Product = _repository.GetByName(Product);
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao realizar a consulta " + ex.Message);
+            }
         }
 
 
@@ -76,7 +116,7 @@ namespace GreenPlusERP.ViewModels
                 string.IsNullOrWhiteSpace(Product.tempoEstimado) ||
                 string.IsNullOrWhiteSpace(Product.temperatura) ||
                 string.IsNullOrWhiteSpace(Product.irrigacao) ||
-                string.IsNullOrWhiteSpace(Product.valorVenda.ToString())
+                string.IsNullOrWhiteSpace(Product.valorVenda.ToString()) 
                 )
             {
                 DataValid = false;
@@ -97,14 +137,30 @@ namespace GreenPlusERP.ViewModels
                 //atualizar dados 
                 if(_repository.ExistingData(Product))
                 {
-                    _repository.Edit(Product);
-                    MessageBox.Show("Dados atualizados com sucesso!");
+                    try
+                    {
+                        _repository.Edit(Product);
+                        MessageBox.Show("Dados atualizados com sucesso!");
+                        Product = new ProductModel();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Falha ao editar os dados " + ex.Message);
+                    } 
+
                 }
                 else // cadastrar dados
                 {
-                    _repository.Add(Product);
-                    MessageBox.Show("Dados cadastrado com sucesso!");
-                    Product = new ProductModel();
+                    try
+                    {
+                        _repository.Add(Product);
+                        MessageBox.Show("Dados cadastrado com sucesso!");
+                        Product = new ProductModel();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Falha ao cadastrar os dados " + ex.Message);
+                    }
                 }
             }
 

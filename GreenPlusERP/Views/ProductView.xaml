@@ -252,7 +252,7 @@
                                Margin="10,5,0,0"/>
 
                         <TextBox x:Name="txtTempo"
-                             Text="{Binding Product.tempoEstimado, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Product.tempoEstimado, Mode=TwoWay, StringFormat=\{0:F0\}, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource TextBoxCadastro}"/>
                     </StackPanel>
 
@@ -262,7 +262,7 @@
                                Margin="10,5,0,0"/>
 
                         <TextBox x:Name="txtTemperatura"
-                             Text="{Binding Product.temperatura, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Product.temperatura, Mode=TwoWay, StringFormat=\{0:D\}, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource TextBoxCadastro}"/>
                     </StackPanel>
 
@@ -324,6 +324,7 @@
                         </CustomControl:Btn>
 
                         <CustomControl:Btn Style="{StaticResource btnCad}"
+                                           Command="{Binding DeletarCommand}"
                                            Cursor="Hand"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Top">

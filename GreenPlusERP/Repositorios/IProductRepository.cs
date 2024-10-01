@@ -13,7 +13,7 @@ namespace GreenPlusERP.Repositorios
         bool ExistingData(ProductModel productModel);
         ProductModel GetByName(ProductModel product);
         void Edit(ProductModel productModel);
-        void Remove(int id);
+        void Remove(string NomeCientifico);
         IEnumerable<ProductModel> GetAll();
     }
 }
