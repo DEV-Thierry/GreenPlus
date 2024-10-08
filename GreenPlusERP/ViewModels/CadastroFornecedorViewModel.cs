@@ -43,7 +43,7 @@ namespace GreenPlusERP.ViewModels
             bool canDelete;
 
             if(string.IsNullOrWhiteSpace(Fornecedor.cnpj) && 
-                string.IsNullOrWhiteSpace(Fornecedor.nomeResponsável))
+                string.IsNullOrWhiteSpace(Fornecedor.nomeResponsavel))
             {
                 canDelete = false;
             }else
@@ -93,10 +93,10 @@ namespace GreenPlusERP.ViewModels
 
             if(string.IsNullOrWhiteSpace(Fornecedor.cnpj) ||
                 string.IsNullOrWhiteSpace(Fornecedor.razaoSocial)||
-                string.IsNullOrWhiteSpace(Fornecedor.situação) || 
+                string.IsNullOrWhiteSpace(Fornecedor.situacao) || 
                 string.IsNullOrWhiteSpace(Fornecedor.email) || 
                 string.IsNullOrWhiteSpace(Fornecedor.contato) || 
-                string.IsNullOrWhiteSpace(Fornecedor.nomeResponsável) || 
+                string.IsNullOrWhiteSpace(Fornecedor.nomeResponsavel) || 
                 string.IsNullOrWhiteSpace(fornecedor.logradouro) || 
                 string.IsNullOrWhiteSpace(Fornecedor.numero) ||
                 string.IsNullOrWhiteSpace(Fornecedor.bairro) ||

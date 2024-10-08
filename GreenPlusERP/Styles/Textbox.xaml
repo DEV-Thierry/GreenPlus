@@ -41,6 +41,49 @@
         </Setter>
     </Style>
     
+    <Style x:Key="TextBoxSearch" TargetType="TextBox">
+        <Setter Property="FontSize"
+                Value="14"/>
+        <Setter Property="Padding"
+                Value="25,5,0,0"/>
+        <Setter Property="Height"
+                Value="30"/>
+        <Setter Property="Margin"
+                Value="10,10,40,10"/>
+        <Setter Property="FontFamily"
+            Value="Montserrat"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        
+                        <Border x:Name="bd"
+                            Background="#DDD"
+                            BorderBrush="#C0C0C0"
+                            BorderThickness="2,2,0,0" CornerRadius="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <Border>
+                                        <Border.Background >
+                                            <ImageBrush ImageSource="C:\Users\thier\source\repos\GreenPlusERP\GreenPlusERP\Images\search.jpg"
+                                                        Stretch="None"
+                                                        AlignmentX="Left"/>
+                                        </Border.Background>
+                                        <ScrollViewer x:Name="PART_ContentHost"/>
+
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="comboBoxCadastro" TargetType="ComboBox">
         <Setter Property="FontSize"
     Value="14"/>
@@ -93,9 +136,53 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
-    
-    
-    
+
+
+    <Style x:Key="Estilo_Placeholder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="FontSize"
+    Value="14"/>
+        <Setter Property="Padding"
+    Value="5,5,0,0"/>
+        <Setter Property="Height"
+    Value="30"/>
+        <Setter Property="Margin"
+    Value="10,10,40,10"/>
+        <Setter Property="FontFamily"
+    Value="Montserrat"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    
+                    <Grid>
+                        <Border Background="#FFF"
+                                CornerRadius="5"/>
+                        <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="Texto" 
+                                 Padding="5,5,0,0"
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                        <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1" Padding="5px">
+                            <TextBox.Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Foreground" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Text, Source={x:Reference Texto}}" Value="">
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
 </ResourceDictionary>

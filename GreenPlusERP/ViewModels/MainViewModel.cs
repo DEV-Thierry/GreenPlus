@@ -8,6 +8,7 @@ using GreenPlusERP.Models;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using GreenPlusERP.Views;
+using System.Windows;
 
 namespace GreenPlusERP.ViewModels
 {
@@ -43,6 +44,7 @@ namespace GreenPlusERP.ViewModels
 
         public ICommand CadastroUsuarioCommand { get; set; }
         public ICommand CadastroFornecedorCommand { get; set; }
+        public ICommand PlantioCommand { get; set; }
 
         //construtor
         public MainViewModel()
@@ -56,6 +58,7 @@ namespace GreenPlusERP.ViewModels
             ProdutoCommand = new viewModelCommand(Product);
             CadastroUsuarioCommand = new viewModelCommand(CadUser);
             CadastroFornecedorCommand = new viewModelCommand(CadFornec);
+            PlantioCommand = new viewModelCommand(plantio);
         }
 
 
@@ -64,7 +67,8 @@ namespace GreenPlusERP.ViewModels
         //metodos
         private void LoadCurrentUserData()
         {
-            var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
+                var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name); 
+            
             if (user != null)
             {
                 CurrentUserAccount.Username = user.UserName;
@@ -83,6 +87,7 @@ namespace GreenPlusERP.ViewModels
 
         private void CadUser(object obj) => CurrentView = new CadastroUsuarioViewModel();
         private void CadFornec(object obj) => CurrentView = new CadastroFornecedorViewModel();
+        private void plantio(object obj) => CurrentView = new PlantioViewModel();
 
     }
 }

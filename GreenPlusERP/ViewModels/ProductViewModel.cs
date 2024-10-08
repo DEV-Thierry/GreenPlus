@@ -42,15 +42,16 @@ namespace GreenPlusERP.ViewModels
             CadastroCommand = new viewModelCommand(ExecuteCadastro, CanExecuteCadastro);
             ConsultarCommand = new viewModelCommand(ExecuteConsulta, CanExecuteConsulta);
             DeletarCommand = new viewModelCommand(ExecuteDelete, CanExecuteDelete);
-            Product.valorVenda = 0;
+            Product.ValorVenda = 0;
             isDetalheVisible = true;
         }
 
         private bool CanExecuteDelete(object obj)
         {
-            if(string.IsNullOrWhiteSpace(Product.nomeCientifico))
+            if(string.IsNullOrWhiteSpace(Product.NomeCientifico))
             {
-                return false;             }
+                return false;
+            }
             else
             {
                 if(_repository.ExistingData(Product))
@@ -66,21 +67,21 @@ namespace GreenPlusERP.ViewModels
 
         private void ExecuteDelete(object obj)
         {
-            string confirma = "Tem certeza que deseja deletar o produto: \"" + Product.nome.ToString() + "\"";
+            string confirma = "Tem certeza que deseja deletar o produto: \"" + Product.NomePlanta.ToString() + "\"";
             string caption = "Deletando dados";
             var result = MessageBox.Show(confirma, caption, MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.Yes)
             {
-                _repository.Remove(Product.nomeCientifico);
-                MessageBox.Show($"prduto: {Product.nome} deletado com sucesso!");
+                _repository.Remove(Product.NomeCientifico);
+                MessageBox.Show($"prduto: {Product.NomePlanta} deletado com sucesso!");
                 Product = new ProductModel();
             }
         }
 
         private bool CanExecuteConsulta(object obj)
         {
-            if(string.IsNullOrWhiteSpace(Product.nome))
+            if(string.IsNullOrWhiteSpace(Product.NomePlanta))
             {
                 return false;
             }
@@ -93,14 +94,14 @@ namespace GreenPlusERP.ViewModels
 
         private void ExecuteConsulta(object obj)
         {
-            try
-            {
+                Product = _repository.GetByName(Product.NomePlanta);
+            //try
+            //{
                 
-                Product = _repository.GetByName(Product);
-            }catch (Exception ex)
-            {
-                MessageBox.Show("Falha ao realizar a consulta " + ex.Message);
-            }
+            //}catch (Exception ex)
+            //{
+            //    MessageBox.Show("Falha ao realizar a consulta " + ex.Message);
+            //}
         }
 
 
@@ -110,13 +111,13 @@ namespace GreenPlusERP.ViewModels
             bool DataValid;
 
             if (
-                string.IsNullOrWhiteSpace(Product.nome)||
-                string.IsNullOrWhiteSpace(Product.nomeCientifico) ||
-                string.IsNullOrWhiteSpace(Product.classificacao) ||
-                string.IsNullOrWhiteSpace(Product.tempoEstimado) ||
-                string.IsNullOrWhiteSpace(Product.temperatura) ||
-                string.IsNullOrWhiteSpace(Product.irrigacao) ||
-                string.IsNullOrWhiteSpace(Product.valorVenda.ToString()) 
+                string.IsNullOrWhiteSpace(Product.NomePlanta)||
+                string.IsNullOrWhiteSpace(Product.NomeCientifico) ||
+                string.IsNullOrWhiteSpace(Product.Classificacao) ||
+                Product.TempoEstimado == null ||
+                Product.Temperatura == null ||
+                Product.Irrigacao == null ||
+                Product.ValorVenda == null
                 )
             {
                 DataValid = false;

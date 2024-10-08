@@ -97,7 +97,7 @@
                                            FontSize="14"
                                            Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                         Text="{Binding Fornecedor.situação}"
+                                         Text="{Binding Fornecedor.situacao}"
                                          Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
                         </Grid>
@@ -137,7 +137,7 @@
                                        FontSize="14"
                                        Margin="20,10,0,0"/>
                                 <TextBox Margin="20,5,30,0"
-                                         Text="{Binding Fornecedor.nomeResponsável}"
+                                         Text="{Binding Fornecedor.nomeResponsavel}"
                                      Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
                         </Grid>
@@ -231,7 +231,7 @@
                                             FontSize="14"
                                             Margin="20,20,0,0"/>
                                 <TextBox Margin="20,5,20,10"
-                                            Text="{Binding Fornecedor.complemneto}" 
+                                            Text="{Binding Fornecedor.complemento}" 
                                             Style="{StaticResource TextBoxCadastro}"/>
                             </StackPanel>
 

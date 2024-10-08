@@ -34,6 +34,7 @@ namespace GreenPlusERP
 
             txtHome.Visibility = Visibility.Visible;
             txtCadastro.Visibility = Visibility.Visible;
+            txtProducao.Visibility = Visibility.Visible;
         }
 
         private void sidebar_MouseLeave(object sender, MouseEventArgs e)
@@ -47,19 +48,33 @@ namespace GreenPlusERP
             sidebar.BeginAnimation(WidthProperty, animacaoLargura);
 
             CadastroDrop.Visibility = Visibility.Collapsed;
+            producaoDrop.Visibility = Visibility.Collapsed;
 
             txtHome.Visibility = Visibility.Collapsed;
             txtCadastro.Visibility = Visibility.Collapsed;
+            txtProducao.Visibility= Visibility.Collapsed;
         }
 
         private void Cadastro_Click(object sender, RoutedEventArgs e)
         {
             if (CadastroDrop.Visibility == Visibility.Collapsed)
+            {
                 CadastroDrop.Visibility = Visibility.Visible;
+                producaoDrop.Visibility = Visibility.Collapsed;
+            }
             else
                 CadastroDrop.Visibility = Visibility.Collapsed;
         }
 
-       
+        private void producao_Click(object sender, RoutedEventArgs e)
+        {
+            if (producaoDrop.Visibility == Visibility.Collapsed)
+            {
+                producaoDrop.Visibility = Visibility.Visible;
+                CadastroDrop.Visibility = Visibility.Collapsed;
+            }
+            else
+                producaoDrop.Visibility = Visibility.Collapsed;
+        }
     }
 }

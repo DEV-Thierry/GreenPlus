@@ -1,6 +1,7 @@
 ﻿using GreenPlusERP.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,9 @@ namespace GreenPlusERP.Repositorios
     {
         void Add(ProductModel productModel);
         bool ExistingData(ProductModel productModel);
-        ProductModel GetByName(ProductModel product);
+        ProductModel GetByName( string name);
         void Edit(ProductModel productModel);
         void Remove(string NomeCientifico);
-        IEnumerable<ProductModel> GetAll();
+        ObservableCollection<ProductModel> GetAll();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using GreenPlusERP.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace GreenPlusERP.Repositorios
 {
     public class productRepository : repositoryBase, IProductRepository
     {
+        private DataContext _context = new DataContext();
         public void Add(ProductModel productModel)
         {
             using (var connection = GetConnection())
@@ -19,13 +22,13 @@ namespace GreenPlusERP.Repositorios
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "insert into [Produto] values(@nome, @nomeCientifico, @classificacao, @tempoEstimado, @temperatura, @irrigacao, @valorVenda)";
-                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = productModel.nome;
-                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = productModel.nomeCientifico;
-                command.Parameters.Add("@classificacao", SqlDbType.VarChar).Value = productModel.classificacao;
-                command.Parameters.Add("@tempoEstimado", SqlDbType.Int).Value = int.Parse(productModel.tempoEstimado);
-                command.Parameters.Add("@temperatura", SqlDbType.Decimal).Value = decimal.Parse(productModel.temperatura);
-                command.Parameters.Add("@irrigacao", SqlDbType.Int).Value = int.Parse(productModel.irrigacao);
-                command.Parameters.Add("@valorVenda", SqlDbType.Float).Value = productModel.valorVenda;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = productModel.NomePlanta;
+                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = productModel.NomeCientifico;
+                command.Parameters.Add("@classificacao", SqlDbType.VarChar).Value = productModel.Classificacao;
+                command.Parameters.Add("@tempoEstimado", SqlDbType.Int).Value = productModel.TempoEstimado;
+                command.Parameters.Add("@temperatura", SqlDbType.Decimal).Value = productModel.Temperatura;
+                command.Parameters.Add("@irrigacao", SqlDbType.Int).Value = productModel.Irrigacao;
+                command.Parameters.Add("@valorVenda", SqlDbType.Float).Value = productModel.ValorVenda;
 
                 command.ExecuteNonQuery();
             }
@@ -38,13 +41,13 @@ namespace GreenPlusERP.Repositorios
             {
                 connection.Open(); command.Connection = connection;
                 command.CommandText = "update [Produto] set NomePlanta = @nome, Classificacao = @classificacao, TempoEstimado = @tempo, Temperatura = @temp, Irrigacao = @irrigacao, ValorVenda = @valor where NomeCientifico = @nomeCien";
-                command.Parameters.Add("@nome", SqlDbType.VarChar).Value= productModel.nome.Trim();
-                command.Parameters.Add("@classificacao", SqlDbType.VarChar).Value= productModel.classificacao.Trim();
-                command.Parameters.Add("@tempo", SqlDbType.Int).Value= int.Parse(productModel.tempoEstimado);
-                command.Parameters.Add("@temp", SqlDbType.Decimal).Value= decimal.Parse(productModel.temperatura);
-                command.Parameters.Add("@irrigacao", SqlDbType.Int).Value= int.Parse(productModel.irrigacao);
-                command.Parameters.Add("@valor", SqlDbType.Float).Value= productModel.valorVenda;
-                command.Parameters.Add("@nomeCien", SqlDbType.VarChar).Value= productModel.nomeCientifico.Trim();
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value= productModel.NomePlanta.Trim();
+                command.Parameters.Add("@classificacao", SqlDbType.VarChar).Value= productModel.Classificacao.Trim();
+                command.Parameters.Add("@tempo", SqlDbType.Int).Value= productModel.TempoEstimado;
+                command.Parameters.Add("@temp", SqlDbType.Decimal).Value= productModel.Temperatura;
+                command.Parameters.Add("@irrigacao", SqlDbType.Int).Value= productModel.Irrigacao;
+                command.Parameters.Add("@valor", SqlDbType.Float).Value= productModel.ValorVenda;
+                command.Parameters.Add("@nomeCien", SqlDbType.VarChar).Value= productModel.NomeCientifico.Trim();
 
                 command.ExecuteNonQuery();
             }
@@ -59,7 +62,7 @@ namespace GreenPlusERP.Repositorios
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "Select * from [Produto] where NomeCientifico = @nomeCientifico";
-                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = productModel.nomeCientifico.Trim();
+                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = productModel.NomeCientifico.Trim();
 
                 existingData = command.ExecuteScalar() == null ? false : true;
             }
@@ -67,57 +70,39 @@ namespace GreenPlusERP.Repositorios
             return existingData;
         }
 
-        public IEnumerable<ProductModel> GetAll()
+        public ObservableCollection<ProductModel> GetAll()
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
-        public ProductModel GetByName(ProductModel product)
+        public ProductModel GetByName(string name)
         {
-            ProductModel Product = null;
-            using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            var product = _context.Products.FirstOrDefault(x => x.NomePlanta == name);
+
+            if(product != null)
             {
-                connection.Open();
-                command.Connection = connection;
-                command.CommandText = "select * from Produto where NomePlanta = @nome";
-                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = product.nome.Trim();
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        product = new ProductModel()
-                        {
-                            id = reader[0].ToString(),
-                            nome = reader[1].ToString(),
-                            nomeCientifico = reader[2].ToString(),
-                            classificacao = reader[3].ToString(),
-                            tempoEstimado = reader[4].ToString(),
-                            temperatura = reader[5].ToString(),
-                            irrigacao = reader[6].ToString(),
-                            valorVenda = float.Parse(reader[7].ToString()),
-                        };
-
-                    }
-
-
-
-                    return product;
-                }
+                return product;
             }
+            else
+            {
+                return new ProductModel();
+            }
+            
         }
 
             public void Remove(string nomeCientifico)
         {
-            using (var connection = GetConnection())
-            using (var command = new SqlCommand())
-            {
-                connection.Open(); command.Connection = connection;
-                command.CommandText = "delete from [Produto] where NomeCientifico = @nomeCientifico";
-                command.Parameters.Add("@nomeCientifico", SqlDbType.VarChar).Value = nomeCientifico;
+            var Produto = _context.Products.FirstOrDefault(x => x.NomeCientifico == nomeCientifico);
 
-                command.ExecuteNonQuery();
+            if (Produto != null)
+            {
+                _context.Products.Remove(Produto);
+                _context.SaveChanges();
             }
+            else {
+                return;
+            }
+
         }
     }
 }

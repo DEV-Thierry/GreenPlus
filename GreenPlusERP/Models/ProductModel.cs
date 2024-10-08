@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenPlusERP.Models
 {
+    [Table("Produto")]
     public class ProductModel
     {
-        public string id {  get; set; }
-        public string nome { get; set; }
-        public string nomeCientifico { get; set; }
-        public string classificacao { get; set; }
-        public string tempoEstimado { get; set; }
-        public string temperatura { get; set; }
-        public string irrigacao { get; set; }
-        public float valorVenda { get; set; }
+        [Key]
+        public int PlantaId {  get; set; }
+        public string NomePlanta { get; set; }
+        public string NomeCientifico { get; set; }
+        public string Classificacao { get; set; }
+        public int TempoEstimado { get; set; }
+        public int Temperatura { get; set; }
+        public int Irrigacao { get; set; }
+        public double ValorVenda { get; set; }
     }
 }

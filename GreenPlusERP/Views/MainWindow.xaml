@@ -128,6 +128,67 @@
                             </Grid>
                         </StackPanel>
                         
+                        <CustomControl:Btn x:Name="producao"
+                                           Style="{StaticResource BtnStyle}"
+                                           Click="producao_Click"
+                                           Grid.Row="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Icon:PackIconMaterial Kind="Sprout"
+                                                       Width="30"
+                                                       Height="30"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"/>
+
+                                <TextBlock Grid.Column="1"
+                                           x:Name="txtProducao"
+                                           Text="Cadastro"
+                                           Style="{StaticResource txtStyles}"/>
+                            </Grid>
+                        </CustomControl:Btn>
+
+                        <StackPanel x:Name="producaoDrop" Visibility="Collapsed"
+                                    Grid.Row="6">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Rectangle VerticalAlignment="Stretch"
+                                           Width="1"
+                                           Margin="2"
+                                           Stroke="#387c51"/>
+
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel Style="{StaticResource Hover}">
+                                        <Button x:Name="plantio"
+                                                Command="{Binding PlantioCommand}"
+                                                Style="{StaticResource BotaoDropdown}"
+                                                Margin="4,7,0,0">Plantio</Button>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Style="{StaticResource Hover}">
+                                        <Button x:Name="colheita"
+                                                Command="{Binding CadastroUsuarioCommand}"
+                                                Style="{StaticResource BotaoDropdown}"
+                                                Margin="4,7,0,0">Colheita</Button>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Style="{StaticResource Hover}">
+                                        <Button x:Name="irrigacao"
+                                                Command="{Binding CadastroFornecedorCommand}"
+                                                Style="{StaticResource BotaoDropdown}"
+                                                Margin="4,7,0,0">Irrigação</Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        
                         
                         
                     </Grid>

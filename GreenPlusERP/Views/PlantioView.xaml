@@ -1,0 +1,64 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GreenPlusERP.Views"
+             xmlns:ViewModel="clr-namespace:GreenPlusERP.ViewModels"
+             xmlns:Models="clr-namespace:GreenPlusERP.Models" x:Class="GreenPlusERP.Views.PlantioView"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280"
+             Style="{StaticResource Page_Style}">
+    <UserControl.DataContext>
+        <ViewModel:PlantioViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Border Background="#E9E9E9"
+            CornerRadius="0,20,20,0"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel>
+                <TextBlock Text="Controle de Colheita"
+                       FontSize="32"
+                       FontWeight="DemiBold"
+                       Margin="20,20,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBox Margin="20,10,20,10"
+                                Style="{StaticResource Estilo_Placeholder}" Tag="Buscar por nome ou Numero do lote"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <Button x:Name="btnPlantio"
+                                Style="{StaticResource btnIncluirPlantio}"
+                                Content="Incluir Plantio"
+                                Foreground="#FFF"
+                                FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <DataGrid
+                  ItemsSource="{Binding plants}">
+                   
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

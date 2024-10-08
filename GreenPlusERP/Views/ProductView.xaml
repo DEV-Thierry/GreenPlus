@@ -94,7 +94,7 @@
 
                             <TextBox 
                                  x:Name="NomePop"
-                                 Text="{Binding Product.nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Product.NomePlanta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Grid.Row="1"
                                  Style="{StaticResource TextBoxCadastro}"/>
                         </StackPanel>
@@ -106,7 +106,7 @@
                                    FontSize="16"
                                    Margin="10,10,0,0"/>
                             <TextBox x:Name="txtNomeC"
-                                 Text="{Binding Product.nomeCientifico, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding Product.NomeCientifico, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource TextBoxCadastro}"/>
                         </StackPanel>
 
@@ -196,7 +196,7 @@
                                Margin="10,10,0,0"/>
                             <ComboBox Name="cbClass"
                                   Height="30"
-                                  Text="{Binding Product.classificacao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Product.Classificacao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Padding="5,5,0,0"
                                      
                                   FontSize="14"
@@ -252,7 +252,7 @@
                                Margin="10,5,0,0"/>
 
                         <TextBox x:Name="txtTempo"
-                             Text="{Binding Product.tempoEstimado, Mode=TwoWay, StringFormat=\{0:F0\}, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Product.TempoEstimado, Mode=TwoWay, StringFormat=\{0:F0\}, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource TextBoxCadastro}"/>
                     </StackPanel>
 
@@ -262,7 +262,7 @@
                                Margin="10,5,0,0"/>
 
                         <TextBox x:Name="txtTemperatura"
-                             Text="{Binding Product.temperatura, Mode=TwoWay, StringFormat=\{0:D\}, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Product.Temperatura, Mode=TwoWay, StringFormat=\{0:D\}, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource TextBoxCadastro}"/>
                     </StackPanel>
 
@@ -275,7 +275,7 @@
                               Height="30"
                               Padding="5,5,0,0"
                               FontSize="14"
-                                  Text="{Binding Product.irrigacao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Text="{Binding Product.Irrigacao, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Margin="10,10,40,0">
                             <ComboBoxItem>4</ComboBoxItem>
                             <ComboBoxItem>8</ComboBoxItem>
@@ -292,7 +292,7 @@
 
                         <TextBox x:Name="txtValor"
                              GotFocus="txtValor_GotFocus"
-                             Text="{Binding Product.valorVenda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C\}}"
+                             Text="{Binding Product.ValorVenda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=\{0:C\}}"
                              Style="{StaticResource TextBoxCadastro}"/>
                     </StackPanel>
                 </Grid>
