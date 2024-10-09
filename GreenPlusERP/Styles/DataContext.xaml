@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:GreenPlusERP.ViewModels"
+                    xmlns:vmd="clr-namespace:GreenPlusERP.ViewModels.Modal"
                     xmlns:view="clr-namespace:GreenPlusERP.Views"
+                    xmlns:viewd="clr-namespace:GreenPlusERP.Views.Modals"
                     >
     <DataTemplate DataType="{x:Type vm:HomeViewModel}">
         <view:HomeView/>
@@ -20,5 +22,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:PlantioViewModel}">
         <view:PlantioView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vmd:ModalPlantioViewModel}">
+        <viewd:modalPlantio/>
     </DataTemplate>
 </ResourceDictionary>

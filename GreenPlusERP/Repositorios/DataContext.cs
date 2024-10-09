@@ -18,5 +18,6 @@ namespace GreenPlusERP.Repositorios
         public DbSet<ProductModel> Products { get; set; }
         public DbSet<FornecedorModel> Fornecedores { get; set; }
         public DbSet<userModel> Users { get; set; }
+        public DbSet<PlantioModel> Plantio { get; set; }
     }
 }

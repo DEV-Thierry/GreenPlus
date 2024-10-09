@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GreenPlusERP.Views
+namespace GreenPlusERP.Views.Modals
 {
     /// <summary>
-    /// Interação lógica para Producao_plantio.xam
+    /// Lógica interna para modalPlantio.xaml
     /// </summary>
-    public partial class Producao_plantio : UserControl
+    public partial class modalPlantio : Window
     {
-        public Producao_plantio()
+        public modalPlantio()
         {
             InitializeComponent();
+        }
+
+        private void Btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -5,35 +5,48 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GreenPlusERP.Models;
 using GreenPlusERP.Repositorios;
+using GreenPlusERP.Views.Modals;
+using Microsoft.EntityFrameworkCore;
 
 namespace GreenPlusERP.ViewModels
 {
     public class PlantioViewModel: viewModelBase
     {
-        private PlantioModel _plantacao;
-        DataContext _context;
-        private List<ProductModel> _plants;
+        private DataContext _context;
+        private ObservableCollection<PlantioModel> _plants;
 
-        public List<ProductModel> plants
+
+        public ObservableCollection<PlantioModel> plants
         {
             get { return _plants; }
-            set { _plants = _context.Products.ToList(); OnPropertyChanged(nameof(plants)); }
+            set { _plants = value; OnPropertyChanged(nameof(plants)); }
         }
 
 
-        public PlantioModel plantacao
-        {
-            get { return _plantacao; }
-            set { _plantacao = value; OnPropertyChanged(nameof(plantacao)); }
-        }
+        //public List<PlantioModel> plantacao
+        //{
+        //    get { return _plantacao; }
+        //    set { _plantacao = value; OnPropertyChanged(nameof(plantacao)); }
+        //}
+
+        public ICommand incluirPlantio {  get; set; }
 
         public PlantioViewModel()
         {
-            _context = new DataContext();  // Supondo que tenha uma implementação concreta
-            plants = _context.Products.ToList(); // Carrega os dados no ObservableCollection
-            plantacao = new PlantioModel();
+            _context = new DataContext();
+            plants = new ObservableCollection<PlantioModel>(
+            _context.Plantio.Include(p => p.produto).OrderBy(x => x.dataPlantio).ToList()
+        );
+            incluirPlantio = new viewModelCommand(executeInclusao);
+        }
+
+        private void executeInclusao(object obj)
+        {
+            modalPlantio modal = new modalPlantio();
+            modal.ShowDialog();
         }
     }
 }
