@@ -30,6 +30,11 @@
 
     <Border CornerRadius="12">
         <Border.Background>
+            <ImageBrush ImageSource="/images/fundo.jpeg"/>
+        </Border.Background>
+    <Border CornerRadius="12"
+            Opacity="0.9">
+        <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                 <GradientStop Offset="0"
                               Color="#3F7944"/>
@@ -39,7 +44,7 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <Grid>
+        <Grid Opacity="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
@@ -165,7 +170,7 @@
                                     Padding="20,0,0,0">
 
                             <TextBox.Background>
-                                <ImageBrush ImageSource="C:\Users\thier\source\repos\GreenPlusERP\GreenPlusERP\Images\user-icon.png"
+                                <ImageBrush ImageSource="/images/user-icon.png"
                                             Stretch="None"
                                             AlignmentX="Left">
                                     
@@ -232,5 +237,7 @@
             </StackPanel>
             
         </Grid>
+    </Border>
+        
     </Border>
 </Window>

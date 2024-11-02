@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GreenPlusERP.Views"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280"
              Style="{StaticResource Page_Style}">
@@ -49,18 +50,19 @@
 
             <StackPanel Grid.Row="2">
                 <DataGrid
-          ItemsSource="{Binding plants, UpdateSourceTrigger=PropertyChanged}" 
-            CanUserAddRows="False"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Margin="10,30,10,10" 
-            AutoGenerateColumns="False">
+                        ItemsSource="{Binding plants, UpdateSourceTrigger=PropertyChanged}" 
+                        CanUserAddRows="False"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Margin="10,30,10,10" 
+                        AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="LOTE" Binding="{Binding plantioId}" Width="*"/>
+                        <DataGridTextColumn Header="LOTE" Binding="{Binding plantioId}"  Width="*"/>
                         <DataGridTextColumn Header="PRODUTO " Binding="{Binding produto.NomePlanta}" Width="3*"/>
                         <DataGridTextColumn Header="QUANTIDADE" Binding="{Binding quantidade}" Width="*"/>
                         <DataGridTextColumn Header="Data Plantio" Binding="{Binding dataPlantio}" Width="*"/>
                         <DataGridTextColumn Header="DATA DE COLHEITA " Binding="{Binding previsaoColheita}" Width="*"/>
+                                          
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

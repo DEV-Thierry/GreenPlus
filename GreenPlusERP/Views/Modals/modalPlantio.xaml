@@ -20,6 +20,10 @@
         <ViewModel:ModalPlantioViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+
     <Border Background="#FFF" CornerRadius="15" BorderThickness="2" BorderBrush="Black">
         <Grid>
             <Grid.RowDefinitions>
@@ -85,8 +89,18 @@
                                           Height="30"
                                           Padding="5,5,0,0"
                                           FontSize="14"
-                                          Margin="20,10,20,0">
+                                          Margin="20,10,20,0"
+                                          >
+                                    <!--<ComboBox.Visibility>
+                                        <Binding Path="IsNEdit" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+                                    </ComboBox.Visibility>-->
                                 </ComboBox>
+
+                                <!--<TextBlock Text="olá">
+                                    <TextBlock.Visibility>
+                                        <Binding Path="IsEdit" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+                                    </TextBlock.Visibility>
+                                </TextBlock>-->
                             </StackPanel>
 
                             <StackPanel Grid.Column="1">

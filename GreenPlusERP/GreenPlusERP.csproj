@@ -9,9 +9,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\file.png" />
+    <None Remove="images\fundo.jpeg" />
+    <None Remove="images\grafico.png" />
+    <None Remove="images\grafico_barras.jpg" />
+    <None Remove="images\grafico_pizza.jpg" />
+    <None Remove="images\key-icon.png" />
+    <None Remove="images\plantio.png" />
+    <None Remove="images\search.jpg" />
+    <None Remove="images\search.svg" />
+    <None Remove="images\user-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\file.png" />
+    <Resource Include="images\fundo.jpeg" />
+    <Resource Include="images\grafico.png" />
+    <Resource Include="images\grafico_barras.jpg" />
+    <Resource Include="images\grafico_pizza.jpg" />
+    <Resource Include="images\key-icon.png" />
+    <Resource Include="images\plantio.png" />
+    <Resource Include="images\search.jpg" />
+    <Resource Include="images\search.svg" />
+    <Resource Include="images\user-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>

@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:GreenPlusERP.Views"
              xmlns:ViewModel="clr-namespace:GreenPlusERP.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800"
+             d:DesignHeight="1080" d:DesignWidth="1280"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              Style="{StaticResource Page_Style}">
 
 
-<Grid Margin="0,4,0,-4">
+    <Grid Margin="0,4,0,-4">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition />
@@ -78,6 +78,29 @@
                                            Foreground="#7d7d7d"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"/>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Notificações"
+                                           FontSize="14"
+                                           Margin="5,10,0,0"/>
+                                <TextBlock Text="Não Lidas"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Margin="5,10,0,0"/>
+                            </StackPanel>
+
+                            <TextBlock Text="8"
+                                       Grid.Row="1"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0,0,0"/>
+                        </Grid>
                     </Grid>
                 </Border>
             </StackPanel>
@@ -120,6 +143,42 @@
                                               Color="#FDC8BE"/>
                                 </LinearGradientBrush>
                             </Border.Background>
+
+                             <Grid Margin="10">
+     <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="60"/>
+         <ColumnDefinition Width="*"/>
+     </Grid.ColumnDefinitions>
+     <Border CornerRadius="50"
+             Padding="5"
+             Height="50"
+             Width="50" HorizontalAlignment="Left"
+             Background="#E15244">
+         <Image Source="/images/file.png"
+                 Stretch="Uniform"
+                Margin="9,0,0,0"/>
+     </Border>
+     <Grid Grid.Column="1">
+         <Grid.RowDefinitions>
+             <RowDefinition Height="0.4*"/>
+             <RowDefinition Height="*"/>
+         </Grid.RowDefinitions>
+         <TextBlock Text="Colheita"
+                    FontWeight="Bold"
+                    FontSize="16" 
+                    VerticalAlignment="Center"
+                    Margin="10,0,0,0"/>
+
+         <TextBlock Text="50"
+                    Grid.Row="1"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Margin="10,0,0,0"
+                    Foreground="White"
+                    VerticalAlignment="Center"/>
+     </Grid>
+
+ </Grid>
                         </Border>
 
                     </StackPanel>
@@ -137,6 +196,43 @@
                                               Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
+
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border CornerRadius="50"
+                                        Padding="8"
+                                        Height="50"
+                                        Width="50" HorizontalAlignment="Left"
+                                        Background="#F8A348">
+                                    <Image Source="/images/plantio.png"
+                                            Stretch="Uniform"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top" Margin="0,-4,0,0"/>
+                                </Border>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.4*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="Plantio"
+                                               FontWeight="Bold"
+                                               FontSize="16" 
+                                               VerticalAlignment="Center"
+                                               Margin="10,0,0,0"/>
+
+                                    <TextBlock Text="83"
+                                               Grid.Row="1"
+                                               FontSize="24"
+                                               FontWeight="Bold"
+                                               Margin="10,0,0,0"
+                                               Foreground="White"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+
+                            </Grid>
                         </Border>
                     </StackPanel>
                 </Grid>
@@ -151,6 +247,14 @@
                                    FontSize="18"
                                    FontFamily="Montserrat"
                                    Margin="20,20,0,0    "/>
+                        <Border Width="500"
+                            Height="500"
+                                Margin="0,20,0,0">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/images/grafico.png"/>
+                            </Border.Background>
+                        </Border>
+
                     </StackPanel>
 
                 </Grid>
@@ -174,6 +278,8 @@
                                FontSize="14"
                                FontFamily="Montserrat"
                                Margin="10,10,0,0"/>
+
+
                     </StackPanel>
                 </Grid>
 
@@ -212,11 +318,24 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="Em Processamento"
-                                               FontSize="10"
-                                               Foreground="DarkGray"
-                                               Margin="10,5,0,0"/>
-                                    
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.2*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Em Processamento"
+                                                   FontSize="10"
+                                                   Foreground="DarkGray"
+                                                   Margin="10,5,0,0"/>
+
+                                        <TextBlock Text="14"
+                                                   Grid.Row="1"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="32"
+                                                   FontWeight="DemiBold"
+                                                   Margin="10,25,0,0"/>
+                                    </Grid>
+
                                     <!--aplicar logica para numero de venda em processamento-->
                                 </StackPanel>
 
@@ -251,6 +370,12 @@
                                                Foreground="DarkGray"
                                                Margin="10,5,0,0"/>
 
+                                    <TextBlock Text="25"
+                                               VerticalAlignment="Center"
+                                               FontSize="32"
+                                                FontWeight="DemiBold"
+                                                Margin="10,25,0,0"/>
+
                                     <!--aplicar logica para numero de venda com pagamento concluido-->
                                 </StackPanel>
 
@@ -284,6 +409,12 @@
                                                FontSize="10"
                                                Foreground="DarkGray"
                                                Margin="10,5,0,0"/>
+
+                                    <TextBlock Text="21"
+                                               VerticalAlignment="Center"
+                                               FontSize="32"
+                                               FontWeight="DemiBold"
+                                               Margin="10,25,0,0"/>
 
                                     <!--aplicar logica para numero de Produtos entregues no mes-->
                                 </StackPanel>

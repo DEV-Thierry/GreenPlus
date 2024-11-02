@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:GreenPlusERP.Views"
              xmlns:ViewModel="clr-namespace:GreenPlusERP.ViewModels"
              xmlns:CustomControl="clr-namespace:GreenPlusERP.CustomControl"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280"
              Style="{StaticResource Page_Style}">

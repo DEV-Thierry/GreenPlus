@@ -146,7 +146,7 @@
 
                                 <TextBlock Grid.Column="1"
                                            x:Name="txtProducao"
-                                           Text="Cadastro"
+                                           Text="Produção"
                                            Style="{StaticResource txtStyles}"/>
                             </Grid>
                         </CustomControl:Btn>

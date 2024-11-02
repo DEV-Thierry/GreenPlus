@@ -15,6 +15,7 @@ namespace GreenPlusERP.ViewModels.Modal
         private PlantioModel _plantio;
         private List<ProductModel> _products;
         private DataContext _context;
+        private bool _isNEdit = true;
 
         public PlantioModel Plantio
         {
@@ -39,6 +40,19 @@ namespace GreenPlusERP.ViewModels.Modal
             set { _products = value; OnPropertyChanged(nameof(Products)); }
         }
 
+        public bool IsNEdit
+        {
+            get => _isNEdit;
+            set { _isNEdit = value; OnPropertyChanged(nameof(IsEdit)); }
+        }
+        
+        public bool IsEdit
+        {
+            get => !_isNEdit;
+            set { _isNEdit = !value; OnPropertyChanged(nameof(IsEdit)); }
+        }
+
+
         public ICommand salvar {  get; set; }
 
 
@@ -46,12 +60,22 @@ namespace GreenPlusERP.ViewModels.Modal
         public ModalPlantioViewModel()
         {
             _context = new DataContext();
+            _products = _context.Products.ToList();
             _plantio = new PlantioModel
             {
                 produto = new ProductModel() 
             };
-            _products = _context.Products.ToList();
+            _isNEdit = true;
+            salvar = new viewModelCommand(executeSave, canExecuteSave);
+        }
 
+        public ModalPlantioViewModel(PlantioModel plantio)
+        {
+            _context = new DataContext();
+            _products = _context.Products.ToList();
+            _plantio = plantio;
+            _plantio.produto = plantio.produto;
+            _isNEdit = false;
             salvar = new viewModelCommand(executeSave, canExecuteSave);
         }
 
