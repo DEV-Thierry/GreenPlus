@@ -35,6 +35,7 @@ namespace GreenPlusERP
             txtHome.Visibility = Visibility.Visible;
             txtCadastro.Visibility = Visibility.Visible;
             txtProducao.Visibility = Visibility.Visible;
+            txtEmpresa.Visibility = Visibility.Visible;
         }
 
         private void sidebar_MouseLeave(object sender, MouseEventArgs e)
@@ -53,6 +54,7 @@ namespace GreenPlusERP
             txtHome.Visibility = Visibility.Collapsed;
             txtCadastro.Visibility = Visibility.Collapsed;
             txtProducao.Visibility= Visibility.Collapsed;
+            txtEmpresa.Visibility = Visibility.Collapsed;
         }
 
         private void Cadastro_Click(object sender, RoutedEventArgs e)

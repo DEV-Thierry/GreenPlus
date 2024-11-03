@@ -12,9 +12,14 @@ namespace GreenPlusERP.Repositorios
     {
         void Add(ProductModel productModel);
         bool ExistingData(ProductModel productModel);
+        bool ExistingInternoData(Interno interno);
         ProductModel GetByName( string name);
         void Edit(ProductModel productModel);
         void Remove(string NomeCientifico);
         ObservableCollection<ProductModel> GetAll();
+        void AddInterno(Interno interno);
+        Interno GetInternoByName(string nome);
+        void UpdateInterno(Interno interno);
+        void DeleteInterno(int id);
     }
 }

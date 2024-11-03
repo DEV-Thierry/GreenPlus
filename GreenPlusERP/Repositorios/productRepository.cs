@@ -34,6 +34,26 @@ namespace GreenPlusERP.Repositorios
             }
         }
 
+        public void AddInterno(Interno interno)
+        {
+            _context.Internos.Add(interno);
+            _context.SaveChanges();
+        }
+
+        public void DeleteInterno(int id)
+        {
+            var interno = _context.Internos.FirstOrDefault(x => x.id == id);
+            if(interno != null)
+            {
+                _context.Internos.Remove(interno);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("erro");
+            }
+        }
+
         public void Edit(ProductModel productModel)
         {
             using(var connection = GetConnection())
@@ -70,6 +90,20 @@ namespace GreenPlusERP.Repositorios
             return existingData;
         }
 
+        public bool ExistingInternoData(Interno interno)
+        {
+            var produto = _context.Internos.FirstOrDefault(x => x.id == interno.id);
+
+            if(produto == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public ObservableCollection<ProductModel> GetAll()
         {
            throw new NotImplementedException();
@@ -90,7 +124,20 @@ namespace GreenPlusERP.Repositorios
             
         }
 
-            public void Remove(string nomeCientifico)
+        public Interno GetInternoByName(string nome)
+        {
+            var interno = _context.Internos.FirstOrDefault(x => x.nome == nome);
+            if(interno != null)
+            {
+                return interno;
+            }
+            else
+            {
+                return new Interno();
+            }
+        }
+
+        public void Remove(string nomeCientifico)
         {
             var Produto = _context.Products.FirstOrDefault(x => x.NomeCientifico == nomeCientifico);
 
@@ -103,6 +150,20 @@ namespace GreenPlusERP.Repositorios
                 return;
             }
 
+        }
+
+        public void UpdateInterno(Interno interno)
+        {
+            var produto = _context.Internos.FirstOrDefault(x => x.id == interno.id);
+
+            if (produto != null)
+            {
+                produto.nome = interno.nome;
+                produto.descricao = interno.descricao;
+                produto.estado = interno.estado;
+                _context.Internos.Update(produto);
+                _context.SaveChanges();
+            }
         }
     }
 }

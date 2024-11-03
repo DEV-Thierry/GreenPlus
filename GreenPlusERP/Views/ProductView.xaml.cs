@@ -31,9 +31,11 @@ namespace GreenPlusERP.Views
             DetalhesVenda.Visibility = Visibility.Visible;
             painelVenda.Visibility = Visibility.Visible;
             PainelRequisitos.Visibility = Visibility.Visible;
+            venda.Visibility = Visibility.Visible;
 
             painelConserva.Visibility = Visibility.Collapsed;
             DetalhesInterno.Visibility = Visibility.Collapsed;
+            interno.Visibility = Visibility.Collapsed;
         }
 
         private void RadioInterno_Checked(object sender, RoutedEventArgs e)
@@ -41,9 +43,11 @@ namespace GreenPlusERP.Views
             DetalhesVenda.Visibility = Visibility.Collapsed;
             painelVenda.Visibility = Visibility.Collapsed;
             PainelRequisitos.Visibility = Visibility.Collapsed;
+            venda.Visibility = Visibility.Collapsed;
 
             painelConserva.Visibility = Visibility.Visible;
             DetalhesInterno.Visibility = Visibility.Visible;
+            interno.Visibility = Visibility.Visible;
         }
 
         private void ImgProduto_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

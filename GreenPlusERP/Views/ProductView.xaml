@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:GreenPlusERP.Views"
              xmlns:ViewModel="clr-namespace:GreenPlusERP.ViewModels"
              xmlns:CustomControl="clr-namespace:GreenPlusERP.CustomControl"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280"
              Style="{StaticResource Page_Style}">
@@ -93,11 +94,23 @@
                                    FontSize="16"
                                    Margin="10,10,0,0"/>
 
-                            <TextBox 
+                            <!--<TextBox 
                                  x:Name="NomePop"
                                  Text="{Binding Product.NomePlanta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Grid.Row="1"
-                                 Style="{StaticResource TextBoxCadastro}"/>
+                                 Style="{StaticResource TextBoxCadastro}"/>-->
+                            <Controls:AutoCompleteBox FontSize="14"
+                                                      Padding="5,5,0,0"
+                                                      Height="30"
+                                                      Margin="10,10,40,10"
+                                                      FontFamily="montserrat"
+                                                      Text="{Binding Pesquisa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding ProductNames}"
+                                                      FilterMode="Contains"
+                                                      >
+                                
+                            </Controls:AutoCompleteBox>
+                            
                         </StackPanel>
 
 
@@ -141,10 +154,22 @@
                                    FontSize="16"
                                    Margin="10,10,0,0"/>
 
-                            <TextBox Text=" "
+                            <!--<TextBox Text="{Binding interno.nome}"
                                  x:Name="txtNome"
                                  Grid.Row="1"
-                                 Style="{StaticResource txtBoxStyle}"/>
+                                 Style="{StaticResource txtBoxStyle}"/>-->
+
+                            <Controls:AutoCompleteBox FontSize="14"
+                                                      Padding="5,5,0,0"
+                                                      Height="30"
+                                                      Margin="10,10,40,10"
+                                                      FontFamily="montserrat"
+                                                      Text="{Binding PesquisaInterno, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding ProductInternosNames}"
+                                                      FilterMode="Contains"
+                          >
+
+                            </Controls:AutoCompleteBox>
                         </StackPanel>
 
 
@@ -154,6 +179,7 @@
                                    FontSize="16"
                                    Margin="10,10,0,0"/>
                             <TextBox x:Name="txtDescri"
+                                     Text="{Binding interno.descricao}"
                                     Style="{StaticResource txtBoxStyle}"/>
                         </StackPanel>
 
@@ -216,7 +242,7 @@
                                    FontSize="16"
                                    Margin="10,10,0,0"/>
                             <TextBox x:Name="txtConserva"
-                                 Text="{Binding Class}"
+                                 Text="{Binding interno.estado}"
                                  Style="{StaticResource txtBoxStyle}"/>
                         </StackPanel>
 
@@ -300,7 +326,7 @@
             </Border>
 
             <!--terceira seção / botões-->
-            <Border Grid.Row="3"
+            <Border Grid.Row="3" x:Name="venda"
                 Margin="20,0,20,10">
                 <Grid>
                     <StackPanel Orientation="Horizontal"
@@ -362,6 +388,76 @@
                         </CustomControl:Btn>
 
                         
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            
+            <Border Grid.Row="3" x:Name="interno"
+                    Visibility="Collapsed"
+                Margin="20,0,20,10">
+                <Grid>
+                    <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                            Margin="0,0,40,0">
+                        <CustomControl:Btn Style="{StaticResource btnCad}"
+                                           Cursor="Hand"
+                                           Command="{Binding ConsultarInternoCommand}"
+                                           Margin="10,0,10,0"
+                                           VerticalAlignment="Top">
+                            <Border Background="#F8A348"
+                                Height="50"
+                                Width="50"
+                                CornerRadius="5">
+                                <Icon:PackIconMaterial Kind="Magnify"
+                                                   Height="30"
+                                                   Width="30"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="#FFF"/>
+                            </Border>
+                        </CustomControl:Btn>
+
+                        <CustomControl:Btn Style="{StaticResource btnCad}"
+                                           Command="{Binding DeletarInternoCommand}"
+                                           Cursor="Hand"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Top">
+                            <Border Background="#E15244"
+                                    Height="50"
+                                    Width="50"
+                                    CornerRadius="5">
+                                <Icon:PackIconMaterial Kind="AlphaX"
+                                                   Height="30"
+                                                   Width="30"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="#FFF"/>
+                            </Border>
+                        </CustomControl:Btn>
+
+                        <CustomControl:Btn  Style="{StaticResource btnCad}"
+                                            Cursor="Hand"
+                                            Command="{Binding CadastroInternoCommand}"
+                                            VerticalAlignment="Top"
+                                            Margin="0,0,0,0">
+                            <Border Background="#3A7B50"
+                                   
+                                Height="50"
+                                Width="50"
+                                CornerRadius="5">
+                                <Icon:PackIconMaterial Kind="Check"
+                                                   Height="30"
+                                                   Width="30"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="#FFF"/>
+                            </Border>
+                        </CustomControl:Btn>
+
+                    
+
+
                     </StackPanel>
                 </Grid>
             </Border>

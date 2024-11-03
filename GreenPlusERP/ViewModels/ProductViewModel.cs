@@ -2,10 +2,12 @@
 using GreenPlusERP.Repositorios;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GreenPlusERP.ViewModels
@@ -14,13 +16,38 @@ namespace GreenPlusERP.ViewModels
     {
         //fields
         private ProductModel _product;
+        private string _pesquisa;
+        private string _pesquisaInterno;
+        private Interno _interno;
         IProductRepository _repository;
         private bool isDetalheVisible;
+
+        public ObservableCollection<string> ProductNames { get; set; }
+        public ObservableCollection<string> ProductInternosNames { get; set; }
 
         public ProductModel Product 
         {
             get { return _product; } 
-            set { _product = value; OnPropertyChanged(nameof(Product)); }
+            set { _product = value; OnPropertyChanged(nameof(Product));}
+        }
+
+        public string PesquisaInterno
+        {
+            get { return _pesquisaInterno;}
+            set { _pesquisaInterno = value; OnPropertyChanged(nameof(PesquisaInterno)); LoadSuggestionsInterno(); }
+        }
+        
+        public string Pesquisa
+        {
+            get { return _pesquisa;}
+            set { _pesquisa = value; OnPropertyChanged(nameof(Pesquisa)); LoadSuggestions(); }
+        }
+
+
+        public Interno interno
+        {
+            get { return _interno; }
+            set { _interno = value; OnPropertyChanged(nameof(interno)); }
         }
 
         public bool IsDetalheVisible
@@ -33,17 +60,127 @@ namespace GreenPlusERP.ViewModels
         public ICommand CadastroCommand {  get; set; }
         public ICommand ConsultarCommand { get; set; }
         public ICommand DeletarCommand { get; set; }
+        public ICommand CadastroInternoCommand {  get; set; }
+        public ICommand ConsultarInternoCommand { get; set; }
+        public ICommand DeletarInternoCommand { get; set; }
 
         //constructor
         public ProductViewModel()
         {
             _repository = new productRepository();
             Product = new ProductModel();
+            interno = new Interno();
             CadastroCommand = new viewModelCommand(ExecuteCadastro, CanExecuteCadastro);
             ConsultarCommand = new viewModelCommand(ExecuteConsulta, CanExecuteConsulta);
             DeletarCommand = new viewModelCommand(ExecuteDelete, CanExecuteDelete);
+            CadastroInternoCommand = new viewModelCommand(ExecuteInternoCadastro, CanExecuteInternoCadastro);
+            ConsultarInternoCommand = new viewModelCommand(ExecuteInternoConsulta, CanExecuteInternoConsulta);
+            DeletarInternoCommand = new viewModelCommand(ExecuteInternoDelete, CanExecuteInternoDelete);
             Product.ValorVenda = 0;
             isDetalheVisible = true;
+            ProductNames = new ObservableCollection<string>();
+            ProductInternosNames = new ObservableCollection<string>();
+        }
+
+        //methods   
+        private bool CanExecuteInternoDelete(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(interno.nome) ||
+                string.IsNullOrWhiteSpace(interno.descricao) ||
+                string.IsNullOrWhiteSpace(interno.estado))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void ExecuteInternoDelete(object obj)
+        {
+            string confirma = "Tem certeza que deseja deletar o produto: \"" + PesquisaInterno.ToString() + "\"";
+            string caption = "Deletando dados";
+            var result = MessageBox.Show(confirma, caption, MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _repository.DeleteInterno(interno.id);
+                    MessageBox.Show("Produto deletado com sucesso!");
+                    interno = new Interno();
+                    PesquisaInterno = "";
+                }catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message+ "Produto não encontrado para ser deletado");
+                }
+                
+            }
+
+        }
+
+        private bool CanExecuteInternoConsulta(object obj)
+        {
+            if(string.IsNullOrWhiteSpace(PesquisaInterno))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private void ExecuteInternoConsulta(object obj)
+        {
+            try
+            {
+                interno = _repository.GetInternoByName(PesquisaInterno);
+                if(interno.nome == null)
+                {
+                    MessageBox.Show("Produto não encontrado");
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private bool CanExecuteInternoCadastro(object obj)
+        {
+            bool required;
+
+            if(string.IsNullOrWhiteSpace(PesquisaInterno) ||
+                string.IsNullOrWhiteSpace(interno.descricao) ||
+                string.IsNullOrWhiteSpace(interno.estado))
+            {
+                required = false;
+            }else
+            {
+                required = true;
+            }
+
+            return required;
+        }
+
+        private void ExecuteInternoCadastro(object obj)
+        {
+            interno.nome = PesquisaInterno;
+            if(_repository.ExistingInternoData(interno))
+            {
+                _repository.UpdateInterno(interno);
+                MessageBox.Show("Dados atualizados com sucesso!");
+                interno = new Interno();
+                PesquisaInterno = "";
+            }
+            else
+            {
+                _repository.AddInterno(interno);
+                MessageBox.Show("Produto cadastrado com sucesso!");
+                interno = new Interno();
+                PesquisaInterno = "";
+            }
         }
 
         private bool CanExecuteDelete(object obj)
@@ -76,12 +213,13 @@ namespace GreenPlusERP.ViewModels
                 _repository.Remove(Product.NomeCientifico);
                 MessageBox.Show($"prduto: {Product.NomePlanta} deletado com sucesso!");
                 Product = new ProductModel();
+                Pesquisa = "";
             }
         }
 
         private bool CanExecuteConsulta(object obj)
         {
-            if(string.IsNullOrWhiteSpace(Product.NomePlanta))
+            if(string.IsNullOrWhiteSpace(Pesquisa))
             {
                 return false;
             }
@@ -94,24 +232,28 @@ namespace GreenPlusERP.ViewModels
 
         private void ExecuteConsulta(object obj)
         {
-                Product = _repository.GetByName(Product.NomePlanta);
-            //try
-            //{
                 
-            //}catch (Exception ex)
-            //{
-            //    MessageBox.Show("Falha ao realizar a consulta " + ex.Message);
-            //}
+            try
+            {
+                Product = _repository.GetByName(Pesquisa);
+                if(Product.NomePlanta == null)
+                {
+                    MessageBox.Show("Produto não encontrado");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Falha ao realizar a consulta " + ex.Message);
+            }
         }
 
 
-        //methods
         private bool CanExecuteCadastro(object obj)
         {
             bool DataValid;
 
             if (
-                string.IsNullOrWhiteSpace(Product.NomePlanta)||
+                string.IsNullOrWhiteSpace(Pesquisa)||
                 string.IsNullOrWhiteSpace(Product.NomeCientifico) ||
                 string.IsNullOrWhiteSpace(Product.Classificacao) ||
                 Product.TempoEstimado == null ||
@@ -131,7 +273,7 @@ namespace GreenPlusERP.ViewModels
 
         private void ExecuteCadastro(object obj)
         {
-
+            Product.NomePlanta = Pesquisa;
             //Executar cadastro de produto de venda 
             if (isDetalheVisible)
             {
@@ -143,6 +285,7 @@ namespace GreenPlusERP.ViewModels
                         _repository.Edit(Product);
                         MessageBox.Show("Dados atualizados com sucesso!");
                         Product = new ProductModel();
+                        Pesquisa = "";
                     }
                     catch (Exception ex)
                     {
@@ -157,6 +300,7 @@ namespace GreenPlusERP.ViewModels
                         _repository.Add(Product);
                         MessageBox.Show("Dados cadastrado com sucesso!");
                         Product = new ProductModel();
+                        Pesquisa = "";
                     }
                     catch (Exception ex)
                     {
@@ -167,6 +311,41 @@ namespace GreenPlusERP.ViewModels
 
         }
 
+
+        public void LoadSuggestions()
+        {
+            using (var context = new DataContext())
+            {
+                var suggestions = context.Products
+                    .Where(p => p.NomePlanta.Contains(Pesquisa))
+                    .Select(p => p.NomePlanta)
+                    .ToList();
+
+                ProductNames.Clear();
+                foreach (var name in suggestions)
+                {
+                    ProductNames.Add(name);
+                }
+            }
+        }
         
+        public void LoadSuggestionsInterno()
+        {
+            using (var context = new DataContext())
+            {
+                var suggestions = context.Internos
+                    .Where(p => p.nome.Contains(PesquisaInterno))
+                    .Select(p => p.nome)
+                    .ToList();
+
+                ProductInternosNames.Clear();
+                foreach (var name in suggestions)
+                {
+                    ProductInternosNames.Add(name);
+                }
+            }
+        }
+
+
     }
 }

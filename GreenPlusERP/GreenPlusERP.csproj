@@ -15,6 +15,7 @@
     <None Remove="images\grafico_barras.jpg" />
     <None Remove="images\grafico_pizza.jpg" />
     <None Remove="images\key-icon.png" />
+    <None Remove="images\logo.png" />
     <None Remove="images\plantio.png" />
     <None Remove="images\search.jpg" />
     <None Remove="images\search.svg" />
@@ -28,6 +29,7 @@
     <Resource Include="images\grafico_barras.jpg" />
     <Resource Include="images\grafico_pizza.jpg" />
     <Resource Include="images\key-icon.png" />
+    <Resource Include="images\logo.png" />
     <Resource Include="images\plantio.png" />
     <Resource Include="images\search.jpg" />
     <Resource Include="images\search.svg" />
@@ -35,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetProjects.WpfToolkit.Input" Version="6.1.94" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
