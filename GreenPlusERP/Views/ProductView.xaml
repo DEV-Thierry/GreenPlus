@@ -203,6 +203,7 @@
                                 <RadioButton Content="Venda"
                                              x:Name="RadioVenda"
                                              Checked="RadioVenda_Checked"
+                                             
                                              FontSize="14"
                                              Margin="10,10,20,0"/>
                                 <RadioButton Content="Uso Interno"

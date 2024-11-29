@@ -24,6 +24,7 @@ namespace GreenPlusERP.Views
         public ProductView()
         {
             InitializeComponent();
+            RadioVenda.IsChecked = true;
         }
 
         private void RadioVenda_Checked(object sender, RoutedEventArgs e)

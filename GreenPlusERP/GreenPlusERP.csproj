@@ -13,26 +13,35 @@
     <None Remove="images\fundo.jpeg" />
     <None Remove="images\grafico.png" />
     <None Remove="images\grafico_barras.jpg" />
+    <None Remove="images\grafico_barras.png" />
     <None Remove="images\grafico_pizza.jpg" />
+    <None Remove="images\grafico_pizza.png" />
     <None Remove="images\key-icon.png" />
     <None Remove="images\logo.png" />
     <None Remove="images\plantio.png" />
     <None Remove="images\search.jpg" />
     <None Remove="images\search.svg" />
+    <None Remove="images\totalVendas.jpg" />
+    <None Remove="images\totalVendas.png" />
+    <None Remove="images\totalVendasPorCategoria.jpg" />
+    <None Remove="images\totalVendasPorCategoria.png" />
     <None Remove="images\user-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="images\file.png" />
     <Resource Include="images\fundo.jpeg" />
-    <Resource Include="images\grafico.png" />
-    <Resource Include="images\grafico_barras.jpg" />
-    <Resource Include="images\grafico_pizza.jpg" />
+    <Resource Include="images\grafico_barras.png" />
+    <Resource Include="images\grafico_pizza.png" />
     <Resource Include="images\key-icon.png" />
     <Resource Include="images\logo.png" />
     <Resource Include="images\plantio.png" />
     <Resource Include="images\search.jpg" />
     <Resource Include="images\search.svg" />
+    <Resource Include="images\totalVendas.jpg" />
+    <Resource Include="images\totalVendas.png" />
+    <Resource Include="images\totalVendasPorCategoria.jpg" />
+    <Resource Include="images\totalVendasPorCategoria.png" />
     <Resource Include="images\user-icon.png" />
   </ItemGroup>
 

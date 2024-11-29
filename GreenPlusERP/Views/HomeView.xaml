@@ -244,14 +244,15 @@
                         Margin="10"/>
                     <StackPanel>
                         <TextBlock Text="Vendas por Categoria"
-                                   FontSize="18"
+                                   FontSize="24"
                                    FontFamily="Montserrat"
-                                   Margin="20,20,0,0    "/>
-                        <Border Width="500"
-                            Height="500"
-                                Margin="0,20,0,0">
+                                   FontWeight="Bold"
+                                   Margin="20,20,0,0"/>
+                        <Border Height="500"
+                                Width="600"
+                                Margin="0,30,0,0"> 
                             <Border.Background>
-                                <ImageBrush ImageSource="/images/grafico.png"/>
+                                <ImageBrush ImageSource="/images/totalVendasPorCategoria.png"/>
                             </Border.Background>
                         </Border>
 
@@ -275,9 +276,16 @@
                         CornerRadius="10"/>
                     <StackPanel>
                         <TextBlock Text="Total de Vendas"
-                               FontSize="14"
+                               FontSize="18"
                                FontFamily="Montserrat"
+                                   FontWeight="Bold"
                                Margin="10,10,0,0"/>
+
+                        <Border Height="180" Margin="0,50,0,0">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/images/totalVendas.png"/>
+                            </Border.Background>
+                        </Border>
 
 
                     </StackPanel>
@@ -333,7 +341,7 @@
                                                    VerticalAlignment="Center"
                                                    FontSize="32"
                                                    FontWeight="DemiBold"
-                                                   Margin="10,25,0,0"/>
+                                                   Margin="20,25,0,0"/>
                                     </Grid>
 
                                     <!--aplicar logica para numero de venda em processamento-->
@@ -374,7 +382,7 @@
                                                VerticalAlignment="Center"
                                                FontSize="32"
                                                 FontWeight="DemiBold"
-                                                Margin="10,25,0,0"/>
+                                                Margin="20,25,0,0"/>
 
                                     <!--aplicar logica para numero de venda com pagamento concluido-->
                                 </StackPanel>
@@ -414,7 +422,7 @@
                                                VerticalAlignment="Center"
                                                FontSize="32"
                                                FontWeight="DemiBold"
-                                               Margin="10,25,0,0"/>
+                                               Margin="20,25,0,0"/>
 
                                     <!--aplicar logica para numero de Produtos entregues no mes-->
                                 </StackPanel>
